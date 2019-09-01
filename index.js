@@ -16,9 +16,9 @@ const URL = 'api.huobi.br.com';
 
 class Hb {
   constructor(options) {
-    const { ak, sk } = options;
-    this.ak = ak;
-    this.sk = sk;
+    const { accessKey, secretKey } = options;
+    this.ak = accessKey;
+    this.sk = secretKey;
   }
 
   sign({

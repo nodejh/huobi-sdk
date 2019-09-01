@@ -3,8 +3,8 @@ const Hb = require('./index');
 (async () => {
   try {
     const hb = new Hb({
-      ak: process.env.HAK || '',
-      sk: process.env.HSK || '',
+      accessKey: process.env.HAK || '',
+      secretKey: process.env.HSK || '',
     });
     const symbols = await hb.getCommonSymbols();
     console.log('symbols: \n', JSON.stringify(symbols));
