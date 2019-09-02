@@ -1,5 +1,7 @@
 # Huobi SDK
 
+- **WIP**
+
 ## Usage
 
 ```sh
