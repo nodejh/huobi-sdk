@@ -1,6 +1,6 @@
 {
   "name": "hb-sdk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "huobi sdk",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/nodejh/huobi-sdk.git"
   },
-  "keywords": ["huobi", "sdk"],
+  "keywords": [
+    "huobi",
+    "sdk"
+  ],
   "author": "nodejh",
   "license": "ISC",
   "bugs": {

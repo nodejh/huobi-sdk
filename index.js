@@ -83,6 +83,34 @@ class Hb {
     }
   }
 
+  async getMarketDetailMerged(params) {
+    // GET /market/detail/merged
+    const options = {
+      method: 'GET',
+      url: URL,
+      path: '/market/detail/merged',
+      params,
+    };
+    try {
+      const api = this.sign(options);
+      return await request.get(api);
+    } catch (error) {
+      logger.error(options.method, options.path, error.message);
+      throw error;
+    }
+  }
+
+  async postOrderOrdersPlace(data) {
+    // POST /v1/order/orders/place
+    const options = {
+      method: 'POST',
+      url: URL,
+      path: '/v1/order/orders/place',
+    };
+    const api = this.sign(options);
+    return await request.post(api, data);
+  }
+
 }
 
 
