@@ -5,9 +5,7 @@ const debug = require('debug')('hb-sdk')
 const request = require('./request');
 const logger = require('./logger');
 
-const URL = 'api.huobi.br.com';
-// const URL = 'api.huobipro.co';
-// const URL = 'api.huobi.pro';
+const URL_DEFAULT = 'api.huobi.br.com';
 
 
 // const URL_HUOBI_PRO = 'api.huobipro.com';
@@ -16,9 +14,10 @@ const URL = 'api.huobi.br.com';
 
 class Hb {
   constructor(options) {
-    const { accessKey, secretKey } = options;
+    const { accessKey, secretKey, url } = options;
     this.ak = accessKey;
     this.sk = secretKey;
+    this.url = url || URL_DEFAULT;
   }
 
   sign({
@@ -55,7 +54,7 @@ class Hb {
     // GET /v1/common/symbols
     const options = {
       method: 'GET',
-      url: URL,
+      url: this.url,
       path: '/v1/common/symbols',
     };
     try {
@@ -71,7 +70,7 @@ class Hb {
     // GET /v1/common/symbols
     const options = {
       method: 'GET',
-      url: URL,
+      url: this.url,
       path: '/v1/account/accounts',
     };
     try {
@@ -87,7 +86,7 @@ class Hb {
     // GET /market/detail/merged
     const options = {
       method: 'GET',
-      url: URL,
+      url: this.url,
       path: '/market/detail/merged',
       params,
     };
@@ -104,7 +103,7 @@ class Hb {
     // POST /v1/order/orders/place
     const options = {
       method: 'POST',
-      url: URL,
+      url: this.url,
       path: '/v1/order/orders/place',
     };
     const api = this.sign(options);
