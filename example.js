@@ -37,14 +37,17 @@ const Hb = require('./index');
     // }
     // console.log('market', market);
 
-    const order = await hb.postOrderOrdersPlace({
-      'account-id': '123',
-      symbol: 'btcusdt',
-      type: 'buy-market',
-      amount: 0.1,
-    })
-    console.log('order', order);
+    // const order = await hb.postOrderOrdersPlace({
+    //   'account-id': '123',
+    //   symbol: 'btcusdt',
+    //   type: 'buy-market',
+    //   amount: 0.1,
+    // })
+    // console.log('order', order);
 
+    const order = await hb.invoke('GET', '/v1/order/orders/123');
+    console.log('order', order);
+    console.log('order', order);
   } catch (error) {
     console.log('error: \n', error);
   }

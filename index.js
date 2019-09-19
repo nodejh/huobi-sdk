@@ -5,7 +5,7 @@ const debug = require('debug')('hb-sdk')
 const request = require('./request');
 const logger = require('./logger');
 
-const URL_DEFAULT = 'api.huobi.br.com';
+const URL_DEFAULT = 'api.huobi.vn';
 
 
 // const URL_HUOBI_PRO = 'api.huobipro.com';
@@ -48,6 +48,25 @@ class Hb {
     const api = `https://${url}${path}?${paramsStr}&Signature=${signature}`;
     debug('api: %s', api);
     return api;
+  }
+
+  async invoke(method, path, data) {
+    const options = {
+      method: method.toUpperCase(),
+      url: this.url,
+      path,
+    };
+    if (options.method === 'GET') {
+      if (data) {
+        options.params = data;
+      }
+      const api = this.sign(options);
+      return await request.get(api);
+    } else if (options.method === 'POST') {
+      const api = this.sign(options);
+      return await request.post(api, data);
+    }
+    return null;
   }
 
   async getCommonSymbols() {
