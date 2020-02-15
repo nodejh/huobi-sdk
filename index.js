@@ -5,19 +5,12 @@ const debug = require('debug')('hb-sdk')
 const request = require('./request');
 const logger = require('./logger');
 
-const URL_DEFAULT = 'api.huobi.vn';
-
-
-// const URL_HUOBI_PRO = 'api.huobipro.com';
-// const URL_HUOBI_PRO = 'api.huobi.br.com'; // 不翻墙的地址
-// const URL_HUOBI_PRO = 'api.huobi.pro'; //备用地址
-
 class Hb {
   constructor(options) {
     const { accessKey, secretKey, url } = options;
     this.ak = accessKey;
     this.sk = secretKey;
-    this.url = url || URL_DEFAULT;
+    this.url = url || 'api.huobi.pro';
   }
 
   sign({
