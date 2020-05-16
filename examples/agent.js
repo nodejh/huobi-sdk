@@ -1,10 +1,15 @@
-const Hb = require('./index');
+
+const Hb = require('../index');
+const SocksProxyAgent = require('socks-proxy-agent');
+
+const agent = new SocksProxyAgent('socks://127.0.0.1:1081');
 
 (async () => {
   try {
     const hb = new Hb({
       accessKey: process.env.HAK || '',
       secretKey: process.env.HSK || '',
+      agent,
     });
     // const symbols = await hb.getCommonSymbols();
     // console.log('symbols: \n', JSON.stringify(symbols));

@@ -2,15 +2,16 @@ const hmacSHA256 = require('crypto-js/hmac-sha256');
 const base64 = require('crypto-js/enc-base64');
 const moment = require('moment');
 const debug = require('debug')('hb-sdk')
-const request = require('./request');
+const { getRequestInstance } = require('./request');
 const logger = require('./logger');
 
 class Hb {
   constructor(options) {
-    const { accessKey, secretKey, url } = options;
+    const { accessKey, secretKey, url, agent } = options;
     this.ak = accessKey;
     this.sk = secretKey;
     this.url = url || 'api.huobi.pro';
+    this.request = getRequestInstance(agent);
   }
 
   sign({
@@ -54,10 +55,10 @@ class Hb {
         options.params = data;
       }
       const api = this.sign(options);
-      return await request.get(api);
+      return await this.request.get(api);
     } else if (options.method === 'POST') {
       const api = this.sign(options);
-      return await request.post(api, data);
+      return await this.request.post(api, data);
     }
     return null;
   }
@@ -71,7 +72,7 @@ class Hb {
     };
     try {
       const api = this.sign(options);
-      return await request.get(api);
+      return await this.request.get(api);
     } catch (error) {
       logger.error(options.method, options.path, error.message);
       throw error;
@@ -87,7 +88,7 @@ class Hb {
     };
     try {
       const api = this.sign(options);
-      return await request.get(api);
+      return await this.request.get(api);
     } catch (error) {
       logger.error(options.method, options.path, error.message);
       throw error;
@@ -104,7 +105,7 @@ class Hb {
     };
     try {
       const api = this.sign(options);
-      return await request.get(api);
+      return await this.request.get(api);
     } catch (error) {
       logger.error(options.method, options.path, error.message);
       throw error;
@@ -119,7 +120,7 @@ class Hb {
       path: '/v1/order/orders/place',
     };
     const api = this.sign(options);
-    return await request.post(api, data);
+    return await this.request.post(api, data);
   }
 
 }
